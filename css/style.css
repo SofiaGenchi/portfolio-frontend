@@ -22,6 +22,7 @@ body {
     justify-content: space-between;
     margin-right: 2%;
     margin-left: 2%;
+    font-family: "Ubuntu", sans-serif;
 }
 
 /* ======================
@@ -120,8 +121,7 @@ nav {
 /* ========================
         MAIN
 =========================== */
-/* main {
-    border: 1px solid;
+main {
     width: 1000px;
     height: 80vh;
     margin: 0 auto;
@@ -150,9 +150,57 @@ nav {
 .div-uno .ideas {
     font-family: var(--ubuntu), sans-serif;
     font-weight: lighter;
-    font-size: 26px;
+    font-size: 1.5rem;
     color: var(--grey);
 }
+
+.div-dos {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2%;
+}
+
+.div-dos p {
+    background-color: var(--black);
+    color: var(--white);
+    width: 90%;
+    height: 50px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 24px;
+    font-size: 24px;
+    letter-spacing: 4px;
+}
+
+/* .div-dos .btn-w{
+    background-color: var(--white);
+    color: var(--black);
+    border: 1px solid var(--black);
+} */
+
+.div-dos p:hover{
+    cursor: pointer;
+}
+
+/* .div-dos .btn-w:hover{
+    background-color: var(--black);
+    color: var(--white);
+} */
+
+.div-dos .btn-b:hover{
+    background-color: var(--white);
+    color: var(--black);
+    border: 1px solid var(--black);
+}
+/*
+
+
+
+
+
 
 .div-dos {
     width: 90%;
