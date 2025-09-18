@@ -77,6 +77,7 @@ header {
     display: flex;
     height: 90px;
     justify-content: space-evenly;
+    background-color: var(--white);
     box-shadow: 0 1px 4px rgba(255, 128, 0, 0.15);
     position: fixed;
     top: 0;
@@ -116,20 +117,20 @@ nav {
     align-items: center;
 }
 
-.div-principal ul {
+.div-principal nav ul {
     width: 100%;
     list-style-type: none;
     display: flex;
     justify-content: space-evenly;
 }
 
-.div-principal ul li {
+.div-principal nav ul li {
     font-family: var(--play), sans-serif;
     font-size: 1.2rem;
     text-transform: uppercase;
 }
 
-.div-principal ul li:hover {
+.div-principal nav ul li:hover {
     color: var(--orange);
     cursor: pointer;
 }
@@ -178,47 +179,12 @@ main {
     margin-top: 2%;
 }
 
-.div-dos p {
-    background-color: var(--black);
-    color: var(--white);
-    width: 90%;
-    height: 50px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 24px;
-    font-size: 24px;
-    letter-spacing: 4px;
-}
-
-/* .div-dos .btn-w{
-    background-color: var(--white);
-    color: var(--black);
-    border: 1px solid var(--black);
-} */
-
-.div-dos p:hover {
-    cursor: pointer;
-}
-
-/* .div-dos .btn-w:hover{
-    background-color: var(--black);
-    color: var(--white);
-} */
-
 .div-dos .btn-b:hover {
     background-color: var(--white);
     color: var(--black);
     border: 1px solid var(--black);
+    cursor: pointer;
 }
-
-/*
-
-
-
-
-
 
 .div-dos {
     width: 90%;
@@ -227,7 +193,7 @@ main {
 }
 
 .div-dos p{
-    width: 220px;
+    width: 100%;
     height: 70px;
     background-color: var(--black);
     color: var(--white);
@@ -237,17 +203,100 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 4% 2% 0 0;
-}
-
-.div-dos .btn-w {
-    background-color: var(--white);
-    color: var(--black);
-    border: 1px solid var(--black);
+    letter-spacing: 4px;
 }
 
 .div-dos p:hover {
     background-color: var(--orange);
     color: var(--white);
     cursor: pointer;
-} */
+}
+
+
+/* ===========================
+    ACERCA DE ME
+=========================== */
+
+.about-me {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.about-me h2 {
+    font-family: "Ubuntu", sans-serif;
+    font-weight: bold;
+    font-size: 40px;
+    color: var(--black);
+    text-align: center;
+}
+
+.about-me > p {
+    text-align: center;
+    width: 800px;
+    margin: 0 auto;
+    font-size: 20px;
+}
+
+.contenedor-conoceme {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2.5rem;
+}
+
+.conoceme h3, .skills h3 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+}
+
+.conoceme p {
+    text-align: justify;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--grey);
+    margin-bottom: 1rem;
+}
+
+.contenedor-conoceme div {
+    width: 40%;
+    padding: 10px;
+}
+
+.contenedor-conoceme .skills ul{
+    list-style-type: none;
+}
+
+.skills ul {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.skills ul li {
+    padding: 1rem 2rem;
+    margin-bottom: 1.5rem;
+    margin-right: 1.5rem;
+    font-size: 1.6rem;
+    background: var(--orange);
+    border-radius: 5px;
+    font-weight: 600;
+    color: var(--white);
+}
+
+.conoceme .btn-conoceme {
+    font-size: 1.6rem;
+    background-color: var(--orange);
+    border: 5px;
+    font-weight: 600;
+    color: var(--white);
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.conoceme .btn-conoceme:hover{
+    background-color: var(--white);
+    border: 1px solid var(--black);
+    color: var(--black);
+    cursor: pointer;
+}
