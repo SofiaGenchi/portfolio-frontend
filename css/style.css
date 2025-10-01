@@ -163,138 +163,124 @@ main {
     font-family: "Ubuntu", sans-serif;
     font-weight: bold;
     font-size: 70px;
+    font-weight: 100;
 }
 
 .div-uno .ideas {
     font-family: var(--ubuntu), sans-serif;
     font-weight: lighter;
     font-size: 1.5rem;
-    color: var(--grey);
+    color: var(--white);
+    font-weight: 100;
+    font-style: italic;
+    letter-spacing: 3px;
 }
 
 .div-dos {
-    width: 100%;
     display: flex;
     justify-content: space-between;
-    margin-top: 2%;
+    align-items: center;
+    width: 500px;
+    margin-top: 4%;
 }
 
-.div-dos .btn-b:hover {
+.div-dos .btn-divdos {
+    border: 1px solid var(--orange);
+    color: var(--white);
+    font-weight: 100;
+    font-size: 1.2rem;
+    width: 220px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+}
+
+.div-dos .btn-divdos:hover{
+    background: var(--orange);
     border: 1px solid var(--white);
     cursor: pointer;
 }
 
-.div-dos {
-    width: 90%;
-    display: flex;
-    justify-content: flex-start;
-}
-
-.div-dos p{
-    width: 100%;
-    height: 70px;
-    background-color: var(--orange);
-    color: var(--white);
-    border-radius: 24px;
-    font-size: 24px;
-    font-family: var(--ubuntu), sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    letter-spacing: 4px;
-}
-
-.div-dos p:hover {
-    background-color: var(--white);
-    color: var(--black);
-    cursor: pointer;
-}
-
-
 /* ===========================
     ACERCA DE ME
+    ABOUT ME
 =========================== */
-
 .about-me {
-    height: auto;
+    height: 100vh;
+}
+
+.about-me .about-me-titulos{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
-.about-me h2 {
-    font-family: "Ubuntu", sans-serif;
-    font-weight: bold;
-    font-size: 40px;
+.about-me-titulos h2 {
+font-family: "Ubuntu", sans-serif;
+    font-size: 4rem;
+    font-weight: 500;
     color: var(--orange);
-    text-align: center;
+    padding: 1.25rem;
 }
 
-.about-me > p {
+.about-me-titulos .aboutme-p {
     text-align: center;
-    width: 800px;
+    width: 80%;
+    font-size: 1.5rem;
+    color: var(--white);
+    font-weight: 100;
+    font-style: italic;
+}
+
+.conoceme-presentacion {
+    width: 80%;
     margin: 0 auto;
-    font-size: 20px;
-}
-
-.contenedor-conoceme {
     display: flex;
-    justify-content: space-between;
-    margin-top: 2.5rem;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    margin-top: 5%;
+    padding: 20px;
 }
 
-.conoceme h3, .skills h3 {
-    font-size: 2.8rem;
-    font-weight: 700;
-    margin-bottom: 3rem;
+.conoceme-presentacion h3 {
+    font-size: 3em;
+    color: var(--white);
+    font-weight: 100;
+    text-transform: uppercase;
 }
 
-.conoceme p {
+.conoceme-presentacion p {
+    font-size: 1.5rem;
+    margin-top: 5%;
+    font-weight: 100;
+    font-style: italic;
     text-align: justify;
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: var(--grey);
-    margin-bottom: 1rem;
 }
 
-.contenedor-conoceme div {
-    width: 40%;
-    padding: 10px;
-}
-
-.contenedor-conoceme .skills ul{
-    list-style-type: none;
-}
-
-.skills ul {
+.conoceme-presentacion .btn-conoceme{
+    border: 1px solid var(--orange);
+    color: var(--white);
+    font-weight: 100;
+    font-size: 1.2rem;
+    width: 220px;
+    height: 40px;
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
 }
 
-.skills ul li {
-    padding: 1rem 2rem;
-    margin-bottom: 1.5rem;
-    margin-right: 1.5rem;
-    font-size: 1.6rem;
+.conoceme-presentacion .btn-conoceme:hover{
     background: var(--orange);
-    border-radius: 5px;
-    font-weight: 600;
-    color: var(--white);
-}
-
-.conoceme .btn-conoceme {
-    font-size: 1.6rem;
-    background-color: var(--orange);
-    border: 5px;
-    font-weight: 600;
-    color: var(--white);
-    text-align: center;
-    margin-top: 2rem;
-}
-
-.conoceme .btn-conoceme:hover{
-    background-color: var(--white);
-    border: 1px solid var(--black);
-    color: var(--black);
+    border: 1px solid var(--white);
     cursor: pointer;
 }
+
+
+/* ===============================
+    section SKILLS
+================================ */
