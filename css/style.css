@@ -1,206 +1,204 @@
-@import url('https://fonts.googleapis.com/css2?family=Plaster&family=Play:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Plaster&family=Play:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
 
 :root {
-    --black: #000000;
-    --orange: #ff8000;
-    --grey: #595959;
-    --white: #ffffff;
-    --ubuntu: "Ubuntu";
-    --play: 'Play';
-    --plaster: "Plaster";
+  --black: #000000;
+  --orange: #ff8000;
+  --grey: #595959;
+  --white: #ffffff;
+  --ubuntu: "Ubuntu";
+  --play: "Play";
+  --plaster: "Plaster";
 }
 
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 body {
-    display: flex;
-    justify-content: space-between;
-    margin-left: 2%;
-    font-family: "Ubuntu", sans-serif;
-    color: var(--orange);
-    background: var(--black);
+  display: flex;
+  justify-content: space-between;
+  margin-left: 2%;
+  font-family: "Ubuntu", sans-serif;
+  color: var(--orange);
+  background: var(--black);
 }
 
 /* ======================
     DIV REDES
 ========================= */
 .div-redes svg {
-    width: 28px;
+  width: 28px;
 }
 
 .div-redes {
-    width: 5%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 5%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .div-redes ul {
-    list-style-type: none;
+  list-style-type: none;
+  position: fixed;
 }
 
 .div-redes ul li {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
-.div-redes ul li a{
-    display: inline-block;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+.div-redes ul li a {
+  display: inline-block;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .div-redes ul li a:hover {
-transform: translateY(-4px);
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .div-redes a:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
-
 
 /* ==================
     DIV PRINCIPAL
 ===================== */
 .div-principal {
-    width: 100%;
+  width: 100%;
 }
 
 /* ===================
     HEADER
 ==================== */
 header {
-    display: flex;
-    height: 90px;
-    justify-content: space-evenly;
-    background-color: var(--black);
-    /* box-shadow: 0 1px 4px rgba(255, 128, 0, 0.15); */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
+  display: flex;
+  height: 90px;
+  justify-content: space-evenly;
+  background-color: var(--black);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
 header .logo {
-    display: flex;
-    align-items: center;
-    width: 40%;
+  display: flex;
+  align-items: center;
+  width: 40%;
 }
 
 .logo p {
-    margin-left: 5%;
-    font-size: 14px;
-    font-family: var(--play), sans-serif;
+  margin-left: 5%;
+  font-size: 14px;
+  font-family: var(--play), sans-serif;
 }
 
 header h1 {
-    font-family: var(--plaster), sans-serif;
-    font-size: 2.5rem;
-    font-weight: 700;
-    text-transform: uppercase;
+  font-family: var(--plaster), sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
 .logo h1:hover {
-    cursor: pointer;
-    color: var(--white);
+  cursor: pointer;
+  color: var(--white);
 }
 
 nav {
-    width: 30%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .div-principal nav ul {
-    width: 100%;
-    list-style-type: none;
-    display: flex;
-    justify-content: space-evenly;
+  width: 100%;
+  list-style-type: none;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .div-principal nav ul li {
-    font-family: var(--play), sans-serif;
-    font-size: 1.2rem;
-    text-transform: uppercase;
+  font-family: var(--play), sans-serif;
+  font-size: 1.2rem;
+  text-transform: uppercase;
 }
 
 .div-principal nav ul li:hover {
-    color: var(--white);
-    cursor: pointer;
+  color: var(--white);
+  cursor: pointer;
 }
-
 
 /* ========================
         MAIN
 =========================== */
 main {
-    width: 1000px;
-    height: 100vh;
-    margin: 0 auto;
+  width: 1000px;
+  height: 100vh;
+  margin: 0 auto;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .div-uno .front {
-    width: 460px;
-    font-size: 32px;
-    font-family: var(--ubuntu), sans-serif;
-    color: var(--orange);
-    font-weight: 600;
+  width: 460px;
+  font-size: 32px;
+  font-family: var(--ubuntu), sans-serif;
+  color: var(--orange);
+  font-weight: 600;
 }
 
 .div-uno h2 {
-    font-family: "Ubuntu", sans-serif;
-    font-weight: bold;
-    font-size: 70px;
-    font-weight: 100;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: bold;
+  font-size: 70px;
+  font-weight: 100;
 }
 
 .div-uno .ideas {
-    font-family: var(--ubuntu), sans-serif;
-    font-weight: lighter;
-    font-size: 1.5rem;
-    color: var(--white);
-    font-weight: 100;
-    font-style: italic;
-    letter-spacing: 3px;
+  font-family: var(--ubuntu), sans-serif;
+  font-weight: lighter;
+  font-size: 1.5rem;
+  color: var(--white);
+  font-weight: 100;
+  font-style: italic;
+  letter-spacing: 3px;
 }
 
 .div-dos {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 500px;
-    margin-top: 4%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 500px;
+  margin-top: 4%;
 }
 
 .div-dos .btn-divdos {
-    border: 1px solid var(--orange);
-    color: var(--white);
-    font-weight: 100;
-    font-size: 1.2rem;
-    width: 220px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50px;
+  border: 1px solid var(--orange);
+  color: var(--white);
+  font-weight: 100;
+  font-size: 1.2rem;
+  width: 220px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
 }
 
-.div-dos .btn-divdos:hover{
-    background: var(--orange);
-    border: 1px solid var(--white);
-    cursor: pointer;
+.div-dos .btn-divdos:hover {
+  background: var(--orange);
+  border: 1px solid var(--white);
+  cursor: pointer;
 }
 
 /* ===========================
@@ -208,79 +206,182 @@ main {
     ABOUT ME
 =========================== */
 .about-me {
-    height: 100vh;
+  height: 100vh;
 }
 
-.about-me .about-me-titulos{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.about-me .about-me-titulos {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .about-me-titulos h2 {
-font-family: "Ubuntu", sans-serif;
-    font-size: 4rem;
-    font-weight: 500;
-    color: var(--orange);
-    padding: 1.25rem;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 4rem;
+  font-weight: 500;
+  color: var(--orange);
+  padding: 1.25rem;
 }
 
 .about-me-titulos .aboutme-p {
-    text-align: center;
-    width: 80%;
-    font-size: 1.5rem;
-    color: var(--white);
-    font-weight: 100;
-    font-style: italic;
+  font-size: 1.5rem;
+  margin-top: 5%;
+  font-weight: 100;
+  font-style: italic;
+  text-align: justify;
+  width: 80%;
 }
-
-.conoceme-presentacion {
-    width: 80%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: center;
-    margin-top: 5%;
-    padding: 20px;
-}
-
-.conoceme-presentacion h3 {
-    font-size: 3em;
-    color: var(--white);
-    font-weight: 100;
-    text-transform: uppercase;
-}
-
-.conoceme-presentacion p {
-    font-size: 1.5rem;
-    margin-top: 5%;
-    font-weight: 100;
-    font-style: italic;
-    text-align: justify;
-}
-
-.conoceme-presentacion .btn-conoceme{
-    border: 1px solid var(--orange);
-    color: var(--white);
-    font-weight: 100;
-    font-size: 1.2rem;
-    width: 220px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50px;
-}
-
-.conoceme-presentacion .btn-conoceme:hover{
-    background: var(--orange);
-    border: 1px solid var(--white);
-    cursor: pointer;
-}
-
 
 /* ===============================
     section SKILLS
 ================================ */
+.skills {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5%;
+}
+.skills h3 {
+  font-family: "Ubuntu", sans-serif;
+  font-size: 4rem;
+  font-weight: 500;
+  color: var(--orange);
+  padding: 1.25rem;
+}
+
+.skills ul {
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.skills ul li {
+  flex: 0 0 20%;
+  padding: 16px;
+  border-radius: 24px;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  transition: all 0.3s ease;
+}
+
+.skills ul li:hover {
+  background-color: var(--grey);
+  transform: scale(1.1);
+  border: 1px solid var(--white);
+  cursor: pointer;
+}
+
+.skills svg {
+  width: 100px;
+  height: 100px;
+}
+
+/* ========================================
+        LISTA DE PROYECTOS
+=========================================*/
+.portafolio .portafolio-titulo {
+  margin-top: 5%;
+  margin-bottom: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.portafolio-titulo h3 {
+  font-family: "Ubuntu", sans-serif;
+  font-size: 4rem;
+  font-weight: 500;
+  color: var(--orange);
+  padding: 1.25rem;
+}
+
+.portafolio-titulo p {
+  font-size: 1.5rem;
+  font-weight: 100;
+  font-style: italic;
+  text-align: justify;
+  width: 50%;
+  color: var(--white);
+}
+
+.lista-portafolio {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 0;
+  list-style-type: none;
+  justify-content: center;
+}
+
+.lista-portafolio li {
+  border: 1px solid var(--grey);
+  border-radius: 12px;
+  width: 550px;
+  height: 550px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.lista-portafolio li:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(88, 88, 88, 0.2);
+background-color: var(--grey);
+}
+
+.lista-portafolio li img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.lista-portafolio li h4 {
+  margin: 20px;
+  font-size: 24px;
+  color: var(--white);
+  text-align: center;
+}
+
+.lista-portafolio li p {
+  margin: 10px;
+  color: var(--white);
+  text-align: justify;
+  font-size: 14px;
+}
+
+.lista-portafolio li div {
+  display: flex;
+  gap: 10px;
+}
+
+.lista-portafolio li div a {
+  text-decoration: none;
+  border: 1px solid var(--white);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 18px;
+  transition: background-color 0.3s;
+  width: 180px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+
+.lista-portafolio li div a:hover {
+  background-color: var(--white);
+  color: var(--black);
+}
