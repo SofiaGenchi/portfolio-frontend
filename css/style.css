@@ -11,6 +11,11 @@
   --plaster: "Plaster";
 }
 
+html {
+  scroll-behavior: smooth;
+  /* es para que el scroll sea suave */
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -124,13 +129,15 @@ nav {
   justify-content: space-evenly;
 }
 
-.div-principal nav ul li {
+.div-principal nav ul li a{
+  text-decoration: none;
   font-family: var(--play), sans-serif;
   font-size: 1.2rem;
   text-transform: uppercase;
+  color: var(--orange);
 }
 
-.div-principal nav ul li:hover {
+.div-principal nav ul li a:hover {
   color: var(--white);
   cursor: pointer;
 }
@@ -293,6 +300,10 @@ main {
   align-items: center;
 }
 
+.portafolio {
+  margin-bottom: 1.5rem;
+}
+
 .portafolio-titulo h3 {
   font-family: "Ubuntu", sans-serif;
   font-size: 4rem;
@@ -384,4 +395,87 @@ background-color: var(--grey);
 .lista-portafolio li div a:hover {
   background-color: var(--white);
   color: var(--black);
+}
+
+
+/* ==================================
+            CONTACTO
+=================================== */
+.contacto {
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contacto-card {
+  max-width: 900px;
+  width: 100%;
+  border: 1px solid var(--grey);
+  border-radius: 12px;
+  padding: 28px;
+  display: grid;
+  gap: 18px;
+  align-items: center;
+}
+
+.contacto-title {
+  font-family: "Ubuntu", sans-serif;
+  font-size: 4rem;
+  font-weight: 500;
+  color: var(--orange);
+  padding: 1.25rem;
+  text-align: center;
+}
+
+.contacto-text {
+  margin: 0;
+  line-height: 1.6;
+  color: var(--grey);
+  font-size: 1.1rem;
+}
+
+.contacto-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.btn-wspp {
+  display: inline-block;
+  text-decoration: none;
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ff8000 0%, #ff9b33 100%);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 6px 18px rgba(255, 128, 0, 0.25);
+  transition: transform .14s ease, box-shadow .14s ease, background .14s ease;
+}
+
+.btn-wspp:hover, .btn-wspp:focus {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(255, 128, 0, 0.35);
+  background: linear-gradient(90deg, #ff9b33 0%, #ff8000 100%);
+}
+
+.redes-invite {
+  margin: 0;
+  font-weight: 600;
+  color: #374151;
+}
+
+/* FOOTER */
+footer {
+  color: var(--white);
+  padding: 40px 20px 20px 20px;
+  font-family: var(--play), sans-serif;
+}
+
+.footer-copy {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 12px;
+  color: #999;
 }
