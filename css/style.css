@@ -208,8 +208,12 @@ main {
   cursor: pointer;
 }
 
+.btn-divdos a {
+  text-decoration: none;
+}
+
 /* ===========================
-    ACERCA DE ME
+    ACERCA DE MI
     ABOUT ME
 =========================== */
 .about-me {
@@ -233,11 +237,12 @@ main {
 
 .about-me-titulos .aboutme-p {
   font-size: 1.5rem;
-  margin-top: 5%;
+  margin-top: 2%;
   font-weight: 100;
   font-style: italic;
   text-align: justify;
-  width: 80%;
+  width: 50%;
+  color: var(--white);
 }
 
 /* ===============================
