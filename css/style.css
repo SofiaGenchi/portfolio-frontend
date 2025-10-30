@@ -23,12 +23,103 @@ html {
 }
 
 body {
+  background-color: var(--white);
+  color: var(--black);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===================
+    HEADER
+==================== */
+header, .header {
+  display: flex;
+  height: 90px;
+  justify-content: space-evenly;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: var(--white);
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: .5rem;
+  z-index: 1100;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 30px;
+  height: 3px;
+  background: var(--black);
+  margin-bottom: 6px;
+  border-radius: 6px;
+  transition: .3s ease;
+}
+
+header .logo {
+  display: flex;
+  align-items: center;
+  width: 40%;
+}
+
+.logo p {
+  margin-left: 5%;
+  font-size: 14px;
+  font-family: var(--play), sans-serif;
+}
+
+header h1 {
+  font-family: var(--plaster), sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.logo h1:hover {
+  cursor: pointer;
+  color: var(--orange);
+}
+
+header nav {
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header nav ul {
+  width: 100%;
+  list-style-type: none;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+header nav ul li a{
+  text-decoration: none;
+  font-family: var(--play), sans-serif;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  color: var(--black);
+}
+
+header nav ul li a:hover {
+  color: var(--orange);
+  cursor: pointer;
+}
+
+/* ============================
+      CONTENEDOR PRINCIPAL
+==============================*/
+.contenedor-principal {
   display: flex;
   justify-content: space-between;
-  margin-left: 2%;
-  font-family: "Ubuntu", sans-serif;
-  color: var(--orange);
-  background: var(--black);
 }
 
 /* ======================
@@ -39,7 +130,7 @@ body {
 }
 
 .div-redes {
-  width: 5%;
+  width: 20%;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -69,98 +160,31 @@ body {
   cursor: pointer;
 }
 
-/* ==================
-    DIV PRINCIPAL
-===================== */
-.div-principal {
-  width: 100%;
-}
-
-/* ===================
-    HEADER
-==================== */
-header {
-  display: flex;
-  height: 90px;
-  justify-content: space-evenly;
-  background-color: var(--black);
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-}
-
-header .logo {
-  display: flex;
-  align-items: center;
-  width: 40%;
-}
-
-.logo p {
-  margin-left: 5%;
-  font-size: 14px;
-  font-family: var(--play), sans-serif;
-}
-
-header h1 {
-  font-family: var(--plaster), sans-serif;
-  font-size: 2.5rem;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.logo h1:hover {
-  cursor: pointer;
-  color: var(--white);
-}
-
-nav {
-  width: 30%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.div-principal nav ul {
-  width: 100%;
-  list-style-type: none;
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.div-principal nav ul li a{
-  text-decoration: none;
-  font-family: var(--play), sans-serif;
-  font-size: 1.2rem;
-  text-transform: uppercase;
-  color: var(--orange);
-}
-
-.div-principal nav ul li a:hover {
-  color: var(--white);
-  cursor: pointer;
-}
-
 /* ========================
         MAIN
 =========================== */
-main {
-  width: 1000px;
-  height: 100vh;
+.contenedor {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   margin: 0 auto;
+}
 
+#inicio {
+  width: 1100px;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 0 auto;
 }
 
 .div-uno .front {
   width: 460px;
   font-size: 32px;
   font-family: var(--ubuntu), sans-serif;
-  color: var(--orange);
+  color: var(--black);
   font-weight: 600;
 }
 
@@ -175,7 +199,6 @@ main {
   font-family: var(--ubuntu), sans-serif;
   font-weight: lighter;
   font-size: 1.5rem;
-  color: var(--white);
   font-weight: 100;
   font-style: italic;
   letter-spacing: 3px;
@@ -190,8 +213,8 @@ main {
 }
 
 .div-dos .btn-divdos {
-  border: 1px solid var(--orange);
-  color: var(--white);
+  border: 1px solid var(--black);
+  color: var(--black);
   font-weight: 100;
   font-size: 1.2rem;
   width: 220px;
@@ -216,11 +239,7 @@ main {
     ACERCA DE MI
     ABOUT ME
 =========================== */
-.about-me {
-  height: 100vh;
-}
-
-.about-me .about-me-titulos {
+.about-me-titulos {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -231,7 +250,7 @@ main {
   font-family: "Ubuntu", sans-serif;
   font-size: 4rem;
   font-weight: 500;
-  color: var(--orange);
+  color: var(--black);
   padding: 1.25rem;
 }
 
@@ -242,7 +261,7 @@ main {
   font-style: italic;
   text-align: justify;
   width: 50%;
-  color: var(--white);
+  color: var(--grey);
 }
 
 /* ===============================
@@ -258,7 +277,7 @@ main {
   font-family: "Ubuntu", sans-serif;
   font-size: 4rem;
   font-weight: 500;
-  color: var(--orange);
+  color: var(--black);
   padding: 1.25rem;
 }
 
@@ -313,7 +332,7 @@ main {
   font-family: "Ubuntu", sans-serif;
   font-size: 4rem;
   font-weight: 500;
-  color: var(--orange);
+  color: var(--black);
   padding: 1.25rem;
 }
 
@@ -323,7 +342,7 @@ main {
   font-style: italic;
   text-align: justify;
   width: 50%;
-  color: var(--white);
+  color: var(--grey);
 }
 
 .lista-portafolio {
@@ -350,9 +369,9 @@ main {
 }
 
 .lista-portafolio li:hover {
+  cursor: pointer;
   transform: translateY(-10px);
   box-shadow: 0 8px 16px rgba(88, 88, 88, 0.2);
-background-color: var(--grey);
 }
 
 .lista-portafolio li img {
@@ -365,13 +384,13 @@ background-color: var(--grey);
 .lista-portafolio li h4 {
   margin: 20px;
   font-size: 24px;
-  color: var(--white);
+  color: var(--black);
   text-align: center;
 }
 
 .lista-portafolio li p {
   margin: 10px;
-  color: var(--white);
+  color: var(--grey);
   text-align: justify;
   font-size: 14px;
 }
@@ -383,8 +402,8 @@ background-color: var(--grey);
 
 .lista-portafolio li div a {
   text-decoration: none;
-  border: 1px solid var(--white);
-  color: white;
+  border: 1px solid var(--grey);
+  color: var(--black);
   padding: 6px 12px;
   border-radius: 6px;
   font-size: 18px;
@@ -398,8 +417,8 @@ background-color: var(--grey);
 }
 
 .lista-portafolio li div a:hover {
-  background-color: var(--white);
-  color: var(--black);
+  background-color: var(--black);
+  color: var(--white);
 }
 
 
@@ -428,7 +447,6 @@ background-color: var(--grey);
   font-family: "Ubuntu", sans-serif;
   font-size: 4rem;
   font-weight: 500;
-  color: var(--orange);
   padding: 1.25rem;
   text-align: center;
 }
@@ -471,9 +489,11 @@ background-color: var(--grey);
   color: #374151;
 }
 
-/* FOOTER */
+/*====================
+      FOOTER
+=====================*/
 footer {
-  color: var(--white);
+  color: var(--grey);
   padding: 40px 20px 20px 20px;
   font-family: var(--play), sans-serif;
 }
@@ -484,3 +504,7 @@ footer {
   font-size: 12px;
   color: #999;
 }
+
+/* =======================
+    BREAKPOINTS
+========================*/
