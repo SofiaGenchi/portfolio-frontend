@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Previsualizador de Estilos Mayoristas — Sofia Genchi</title>
+  <style>
+    :root {
+      --bg-global: #07090e;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --text-muted: #8e9bb4;
+      --accent: #f1000e;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-global);
+      color: #ffffff;
+      font-family: system-ui, -apple-system, sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: rgba(7, 9, 14, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1.25rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-badge {
+      background: var(--accent);
+      color: white;
+      font-weight: 800;
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+    }
+
+    .header-title-wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.2;
+    }
+
+    .header-subtitle {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .header-info {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      max-width: 400px;
+      text-align: right;
+    }
+
+    .preview-container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    /* Estilos base para las secciones generadas */
+    .hero {
+      position: relative;
+      min-height: 75vh;
+      padding: 6rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      border-bottom: 1px solid var(--border-color);
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .hero > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.75rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .hero-meta-badge {
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .hero h2 {
+      font-size: 3rem;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+      font-weight: 800;
+      max-width: 900px;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      font-size: 1.125rem;
+      margin-bottom: 2.5rem;
+      max-width: 700px;
+      opacity: 0.9;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary, .btn-secondary {
+      padding: 0.9rem 1.75rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.15);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .pick-bar {
+      padding: 1.5rem 4rem;
+      border-bottom: 4px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+      z-index: 10;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+
+    .pick-info {
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .pick-info code {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      font-family: monospace;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--accent);
+    }
+
+    .pick-btn {
+      background: #ffffff;
+      color: #07090e;
+      border: none;
+      padding: 0.85rem 1.5rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .pick-btn:hover {
+      background: var(--accent);
+      color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(241,0,14,0.3);
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #102a83;
+      color: white;
+      padding: 1.25rem 2rem;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.15);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      font-weight: 600;
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    .toast-icon {
+      background: var(--accent);
+      color: white;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+      }
+      .header-info {
+        text-align: left;
+      }
+      .hero {
+        padding: 4rem 1.5rem;
+      }
+      .hero h2 {
+        font-size: 2.25rem;
+      }
+      .pick-bar {
+        padding: 1.5rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      .pick-btn {
+        width: 100%;
+      }
+    }
+
+    /* Inyección de estilos de dirección */
+    
+  #direction-0 {
+    background: #FDF6F4;
+    color: #333333;
+    font-family: "DM Sans", system-ui, sans-serif;
+    line-height: 1.7;
+  }
+  #direction-0 .hero-meta { color: #B0A3A0; }
+  #direction-0 .hero-meta-badge { background: #FFFFFF; }
+  #direction-0 h2 {
+    font-family: "Playfair Display", "Georgia", serif;
+    color: #333333;
+    
+    
+  }
+  #direction-0 h2 .accent { color: #C27B7B; }
+  #direction-0 p.subtitle { color: #B0A3A0; }
+  #direction-0 .btn-primary {
+    background: #C27B7B;
+    color: #000;
+    border-radius: 0px;
+    box-shadow: none;
+    
+    
+  }
+  #direction-0 .btn-secondary {
+    background: transparent;
+    color: #333333;
+    border: 1px solid #333333;
+    border-radius: 0px;
+    
+  }
+  #direction-0::before {
+    background: transparent;
+  }
+  #direction-0 .pick-info strong { color: #333333; }
+  
+
+  #direction-1 {
+    background: #FAF7F2;
+    color: #2D2D2D;
+    font-family: "Inter", system-ui, sans-serif;
+    line-height: 1.7;
+  }
+  #direction-1 .hero-meta { color: #9A9A8E; }
+  #direction-1 .hero-meta-badge { background: #FFFFFF; }
+  #direction-1 h2 {
+    font-family: "Fraunces", "Georgia", serif;
+    color: #2D2D2D;
+    
+    
+  }
+  #direction-1 h2 .accent { color: #7D8A6E; }
+  #direction-1 p.subtitle { color: #9A9A8E; }
+  #direction-1 .btn-primary {
+    background: #7D8A6E;
+    color: #000;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+    
+    
+  }
+  #direction-1 .btn-secondary {
+    background: transparent;
+    color: #2D2D2D;
+    border: 1px solid #2D2D2D;
+    border-radius: 8px;
+    
+  }
+  #direction-1::before {
+    background: transparent;
+  }
+  #direction-1 .pick-info strong { color: #2D2D2D; }
+  
+
+  #direction-2 {
+    background: #F8F6FD;
+    color: #2D2D3D;
+    font-family: "Manrope", system-ui, sans-serif;
+    line-height: 1.4;
+  }
+  #direction-2 .hero-meta { color: #A09AB5; }
+  #direction-2 .hero-meta-badge { background: #FFFFFF; }
+  #direction-2 h2 {
+    font-family: "DM Serif Display", "Georgia", serif;
+    color: #2D2D3D;
+    text-transform: uppercase;
+    
+  }
+  #direction-2 h2 .accent { color: #8B7EC8; }
+  #direction-2 p.subtitle { color: #A09AB5; }
+  #direction-2 .btn-primary {
+    background: #8B7EC8;
+    color: #000;
+    border-radius: 0px;
+    box-shadow: 6px 6px 0px 0px #000000;
+    border: 3px solid #2D2D3D;
+    
+  }
+  #direction-2 .btn-secondary {
+    background: transparent;
+    color: #2D2D3D;
+    border: 1px solid #2D2D3D;
+    border-radius: 0px;
+    border-width: 3px; box-shadow: 6px 6px 0px 0px #000000;
+  }
+  #direction-2::before {
+    background: repeating-linear-gradient(45deg, #2D2D3D11 0, #2D2D3D11 2px, transparent 2px, transparent 24px);
+  }
+  #direction-2 .pick-info strong { color: #2D2D3D; }
+  
+
+  #direction-3 {
+    background: #F5F9FA;
+    color: #1A2D33;
+    font-family: "Inter", system-ui, sans-serif;
+    line-height: 1.5;
+  }
+  #direction-3 .hero-meta { color: #8AABB5; }
+  #direction-3 .hero-meta-badge { background: #FFFFFF; }
+  #direction-3 h2 {
+    font-family: "Inter", "Georgia", serif;
+    color: #1A2D33;
+    
+    
+  }
+  #direction-3 h2 .accent { color: #3D8B9E; }
+  #direction-3 p.subtitle { color: #8AABB5; }
+  #direction-3 .btn-primary {
+    background: #3D8B9E;
+    color: #FFF;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    
+    
+  }
+  #direction-3 .btn-secondary {
+    background: transparent;
+    color: #1A2D33;
+    border: 1px solid #1A2D33;
+    border-radius: 4px;
+    
+  }
+  #direction-3::before {
+    background: linear-gradient(to right, transparent 0%, transparent calc(100% - 1px), #8AABB533 100%);
+  }
+  #direction-3 .pick-info strong { color: #1A2D33; }
+  
+  </style>
+  https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=Fraunces:wght@400;600;700&family=Inter:wght@300;400;500;600&family=DM+Serif+Display&family=Manrope:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap
+</head>
+<body>
+
+  <header>
+    <div class="header-logo">
+      <div class="logo-badge">PEGALO</div>
+      <div class="header-title-wrapper">
+        <h1 class="header-title">Sofia Genchi</h1>
+        <p class="header-subtitle">Previsualizador de Estilos Mayoristas</p>
+      </div>
+    </div>
+    <div class="header-info">
+      Revisa las variantes de diseño abajo y haz clic en <strong>"Elegir este estilo"</strong> para copiar el código.
+    </div>
+  </header>
+
+  <div class="preview-container">
+    
+  <section class="hero" id="direction-0">
+    <div class="hero-meta">
+      <span>Editorial Serif</span>
+      <span class="hero-meta-badge">Blush Editorial</span>
+      <span class="hero-meta-badge">Playfair Display · DM Sans</span>
+    </div>
+    <h2>Sofia Genchi <span class="accent">·</span></h2>
+    <p class="subtitle">Desarrolladora Web Junior certificada en ReactJS.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" type="button">Ver Proyectos →</button>
+      <button class="btn-secondary" type="button">Saber más</button>
+    </div>
+  </section>
+  <div class="pick-bar" style="background: #FDF6F4; color: #333333;">
+    <div class="pick-info">
+      <strong>Editorial Serif</strong> · Autoridad intelectual y calma editorial<br />
+      Código: <code>STYLE:ED-L2-F2</code>
+    </div>
+    <button class="pick-btn" type="button" onclick="pickStyle('ED-L2-F2', 'Editorial Serif')">
+      Elegir este estilo →
+    </button>
+  </div>
+  
+
+  <section class="hero" id="direction-1">
+    <div class="hero-meta">
+      <span>Understated Elegance</span>
+      <span class="hero-meta-badge">Cream &amp; Sage</span>
+      <span class="hero-meta-badge">Fraunces · Inter</span>
+    </div>
+    <h2>Sofia Genchi <span class="accent"></span></h2>
+    <p class="subtitle">Desarrolladora Web Junior certificada en ReactJS.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" type="button">Ver Proyectos →</button>
+      <button class="btn-secondary" type="button">Saber más</button>
+    </div>
+  </section>
+  <div class="pick-bar" style="background: #FAF7F2; color: #2D2D2D;">
+    <div class="pick-info">
+      <strong>Understated Elegance</strong> · Calma editorial y artesanía<br />
+      Código: <code>STYLE:UE-L1-F4</code>
+    </div>
+    <button class="pick-btn" type="button" onclick="pickStyle('UE-L1-F4', 'Understated Elegance')">
+      Elegir este estilo →
+    </button>
+  </div>
+  
+
+  <section class="hero" id="direction-2">
+    <div class="hero-meta">
+      <span>Neo-Brutalist</span>
+      <span class="hero-meta-badge">Cloud Lavender</span>
+      <span class="hero-meta-badge">DM Serif Display · Manrope</span>
+    </div>
+    <h2>Sofia Genchi <span class="accent">!</span></h2>
+    <p class="subtitle">Desarrolladora Web Junior certificada en ReactJS.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" type="button">Ver Proyectos →</button>
+      <button class="btn-secondary" type="button">Saber más</button>
+    </div>
+  </section>
+  <div class="pick-bar" style="background: #F8F6FD; color: #2D2D3D;">
+    <div class="pick-info">
+      <strong>Neo-Brutalist</strong> · Irreverencia cruda y energía<br />
+      Código: <code>STYLE:NB-L4-F7</code>
+    </div>
+    <button class="pick-btn" type="button" onclick="pickStyle('NB-L4-F7', 'Neo-Brutalist')">
+      Elegir este estilo →
+    </button>
+  </div>
+  
+
+  <section class="hero" id="direction-3">
+    <div class="hero-meta">
+      <span>Swiss Minimal</span>
+      <span class="hero-meta-badge">Pearl Marine</span>
+      <span class="hero-meta-badge">Inter · Inter</span>
+    </div>
+    <h2>Sofia Genchi <span class="accent"></span></h2>
+    <p class="subtitle">Desarrolladora Web Junior certificada en ReactJS.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" type="button">Ver Proyectos →</button>
+      <button class="btn-secondary" type="button">Saber más</button>
+    </div>
+  </section>
+  <div class="pick-bar" style="background: #F5F9FA; color: #1A2D33;">
+    <div class="pick-info">
+      <strong>Swiss Minimal</strong> · Claridad funcional y precisión<br />
+      Código: <code>STYLE:SM-L5-F10</code>
+    </div>
+    <button class="pick-btn" type="button" onclick="pickStyle('SM-L5-F10', 'Swiss Minimal')">
+      Elegir este estilo →
+    </button>
+  </div>
+  
+  </div>
+
+  <div class="toast" id="toast-notification">
+    <div class="toast-icon">✓</div>
+    <div>
+      <p id="toast-title" style="margin: 0; font-size: 0.95rem;">¡Estilo seleccionado!</p>
+      <p id="toast-desc" style="margin: 0; font-size: 0.85rem; opacity: 0.9; font-weight: normal; margin-top: 0.2rem;"></p>
+    </div>
+  </div>
+
+  <script>
+    function pickStyle(code, name) {
+      const fullCode = 'STYLE:' + code;
+      navigator.clipboard.writeText(fullCode).then(() => {
+        showToast(name, fullCode);
+      }).catch(err => {
+        console.error('Error al copiar al portapapeles: ', err);
+        // Fallback
+        const textarea = document.createElement('textarea');
+        textarea.value = fullCode;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        showToast(name, fullCode);
+      });
+    }
+
+    function showToast(name, code) {
+      const toast = document.getElementById('toast-notification');
+      document.getElementById('toast-title').innerText = 'Estilo ' + name + ' seleccionado';
+      document.getElementById('toast-desc').innerText = 'Código ' + code + ' copiado al portapapeles. Pégalo en el chat de Antigravity.';
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 6000);
+    }
+  </script>
+</body>
+</html>

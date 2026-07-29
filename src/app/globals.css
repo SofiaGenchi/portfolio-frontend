@@ -1,0 +1,157 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colores base — ED-L2 (Blush Editorial) */
+  --color-bg: #FDF6F4;
+  --color-card: #FFFFFF;
+  --color-primary: #111111;
+  --color-secondary: #4A4A4A;
+  --color-accent: #C27B7B;
+  --color-text: #333333;
+  --color-muted: #B0A3A0;
+
+  /* Tipografía */
+  --font-display: var(--font-display-google), "Georgia", serif;
+  --font-body: var(--font-body-google), system-ui, sans-serif;
+  --font-plaster: var(--font-plaster-google), sans-serif;
+
+  /* Tamaños base */
+  --font-size-base: 18px;
+  --line-height-body: 1.7;
+
+  /* Layout */
+  --radius: 0px;
+  --spacing-unit: 8px;
+  --shadow-card: none;
+}
+
+:root {
+  --color-bg: #FDF6F4;
+  --color-card: #FFFFFF;
+  --color-primary: #111111;
+  --color-secondary: #4A4A4A;
+  --color-accent: #C27B7B;
+  --color-text: #333333;
+  --color-muted: #B0A3A0;
+
+  --font-size-sm: calc(var(--font-size-base) * 0.875);
+  --font-size-lg: calc(var(--font-size-base) * 1.125);
+  --font-size-xl: calc(var(--font-size-base) * 1.25);
+  --font-size-2xl: calc(var(--font-size-base) * 1.5);
+  --font-size-3xl: calc(var(--font-size-base) * 2);
+  --font-size-4xl: calc(var(--font-size-base) * 2.75);
+  --font-size-5xl: calc(var(--font-size-base) * 3.75);
+  --font-size-6xl: calc(var(--font-size-base) * 5);
+
+  --space-1: calc(var(--spacing-unit) * 0.5);
+  --space-2: var(--spacing-unit);
+  --space-3: calc(var(--spacing-unit) * 1.5);
+  --space-4: calc(var(--spacing-unit) * 2);
+  --space-6: calc(var(--spacing-unit) * 3);
+  --space-8: calc(var(--spacing-unit) * 4);
+  --space-12: calc(var(--spacing-unit) * 6);
+  --space-16: calc(var(--spacing-unit) * 8);
+  --space-24: calc(var(--spacing-unit) * 12);
+  --space-32: calc(var(--spacing-unit) * 16);
+
+  --radius-sm: 0px;
+  --radius-lg: 0px;
+
+  --transition-fast: 150ms ease-out;
+  --transition-base: 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-slow: 600ms cubic-bezier(0.22, 1, 0.36, 1);
+
+  --shadow: none;
+  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.08);
+  
+  --radius: 0rem;
+}
+
+/* Shadcn defaults para Tailwind v4 compatibility */
+@layer base {
+  :root {
+    --background: 11 40% 97%;
+    --foreground: 0 0% 20%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 20%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 20%;
+    --primary: 0 0% 7%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 29%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 0 42% 62%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 42% 62%;
+  }
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+}
+
+html {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-body);
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  color: var(--color-text);
+  line-height: 1.15;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+a:hover { color: var(--color-primary); }
+
+*:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-card);
+}
+
+[data-animate] { will-change: transform, opacity; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  [data-animate] { opacity: 1 !important; transform: none !important; }
+}
+
+.no-js [data-animate] { opacity: 1 !important; transform: none !important; }
