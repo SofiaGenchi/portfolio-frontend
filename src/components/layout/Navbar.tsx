@@ -6,9 +6,17 @@ import { siteConfig } from "@/lib/site-config";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
+const navLinks = [
+  { label: "Inicio", href: "#inicio" },
+  { label: "Acerca", href: "#acerca" },
+  { label: "Proyectos", href: "#proyectos" },
+  { label: "Contacto", href: "#contacto" },
+] as const;
+
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("#inicio");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,11 +26,26 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
-    { label: "Inicio", href: "#inicio" },
-    { label: "Proyectos", href: "#proyectos" },
-    { label: "Contacto", href: "#contacto" },
-  ];
+  useEffect(() => {
+    const sections = navLinks
+      .map((link) => document.querySelector(link.href))
+      .filter((el): el is Element => el !== null);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (visible.length > 0) {
+          setActiveSection(`#${visible[0].target.id}`);
+        }
+      },
+      { rootMargin: "-40% 0px -55% 0px", threshold: [0, 0.25, 0.5, 1] }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <header
@@ -45,27 +68,34 @@ export function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-foreground hover:text-accent font-medium uppercase tracking-wide text-sm transition-colors"
+              aria-current={activeSection === link.href ? "true" : undefined}
+              className={`font-medium uppercase tracking-wide text-sm transition-colors ${
+                activeSection === link.href
+                  ? "text-accent border-b-2 border-accent pb-0.5"
+                  : "text-foreground hover:text-accent"
+              }`}
             >
               {link.label}
             </Link>
           ))}
           <a
-            href={siteConfig.cta.primary.href}
-            className="px-5 py-2.5 bg-primary text-white hover:bg-accent transition-colors uppercase tracking-wider text-sm font-medium"
+            href="#contacto"
+            className="px-5 py-2.5 bg-primary text-primary-foreground hover:bg-accent hover:text-accent-foreground transition-colors uppercase tracking-wider text-sm font-medium"
           >
-            {siteConfig.cta.primary.label}
+            Contactarme
           </a>
         </nav>
 
         {/* Mobile Nav Toggle */}
-        <button
-          className="md:hidden p-2 text-foreground"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Toggle Menu"
-        >
-          {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
+        <div className="md:hidden">
+          <button
+            className="p-2 text-foreground"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Abrir menú"
+          >
+            {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
@@ -82,18 +112,23 @@ export function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-foreground hover:text-accent font-medium uppercase tracking-wide text-xl py-2"
                   onClick={() => setMobileMenuOpen(false)}
+                  aria-current={activeSection === link.href ? "true" : undefined}
+                  className={`font-medium uppercase tracking-wide text-xl py-2 ${
+                    activeSection === link.href
+                      ? "text-accent"
+                      : "text-foreground hover:text-accent"
+                  }`}
                 >
                   {link.label}
                 </Link>
               ))}
               <a
-                href={siteConfig.cta.primary.href}
-                className="mt-4 px-5 py-4 bg-primary text-white text-center hover:bg-accent transition-colors uppercase tracking-wider text-sm font-medium"
+                href="#contacto"
+                className="mt-2 px-5 py-4 bg-primary text-primary-foreground text-center hover:bg-accent transition-colors uppercase tracking-wider text-sm font-medium"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                {siteConfig.cta.primary.label}
+                Contactarme
               </a>
             </nav>
           </motion.div>

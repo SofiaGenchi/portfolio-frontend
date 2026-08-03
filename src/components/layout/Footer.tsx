@@ -1,4 +1,5 @@
 import { siteConfig } from "@/lib/site-config";
+import Link from "next/link";
 
 const Github = ({ size = 24 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -19,7 +20,6 @@ const Instagram = ({ size = 24 }: { size?: number }) => (
     <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
   </svg>
 );
-import Link from "next/link";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -32,7 +32,7 @@ export function Footer() {
             {siteConfig.brand.short}
           </Link>
           <p className="text-muted-foreground text-sm max-w-xs text-center md:text-left">
-            {siteConfig.brand.tagline}. {siteConfig.brand.description}
+            Desarrolladora Web. Diseño y desarrollo interfaces limpias y accesibles.
           </p>
         </div>
 

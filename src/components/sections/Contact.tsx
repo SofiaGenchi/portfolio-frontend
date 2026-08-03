@@ -1,24 +1,49 @@
 "use client";
 
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import { Reveal } from "@/components/ui/reveal";
 import { siteConfig } from "@/lib/site-config";
 import { Send, Loader2 } from "lucide-react";
 import { submitContact } from "@/app/actions/contact";
 
+const schema = z.object({
+  name: z.string().min(2, "Ingresá tu nombre (mínimo 2 caracteres)"),
+  email: z.string().email("Ingresá un email válido"),
+  message: z.string().min(10, "Contame un poco más (mínimo 10 caracteres)"),
+  website: z.string().optional(),
+});
+
+type ContactForm = z.infer<typeof schema>;
+
 export function Contact() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<ContactForm>({
+    resolver: zodResolver(schema),
+    defaultValues: { name: "", email: "", message: "", website: "" },
+  });
+
+  const onSubmit = async (data: ContactForm) => {
     setStatus("submitting");
-    
-    const formData = new FormData(e.currentTarget);
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("email", data.email);
+    formData.append("message", data.message);
+    formData.append("website", data.website ?? "");
+
     const result = await submitContact(formData);
-    
+
     if (result.success) {
       setStatus("success");
-      (e.target as HTMLFormElement).reset();
+      reset();
     } else {
       setStatus("error");
     }
@@ -33,8 +58,7 @@ export function Contact() {
           </Reveal>
           <Reveal delay={0.1}>
             <p className="text-lg text-muted-foreground italic max-w-2xl leading-relaxed">
-              Si querés colaborar, consultar sobre un proyecto o propuesta de trabajo, me encantará recibir tu mensaje.
-              Soy desarrolladora web enfocada en frontend y disponible para nuevos desafíos.
+              Si querés colaborar, consultar sobre un proyecto o propuesta de trabajo, me encantará recibir tu mensaje. Soy desarrolladora web enfocada en frontend y disponible para nuevos desafíos.
             </p>
           </Reveal>
         </div>
@@ -48,13 +72,13 @@ export function Contact() {
                   Puedes enviarme un correo electrónico o un WhatsApp directamente si lo prefieres.
                 </p>
               </div>
-              
+
               <div className="space-y-4">
-                <a 
+                <a
                   href={`mailto:${siteConfig.contact.email}`}
                   className="flex items-center gap-4 p-4 border border-border hover:border-primary transition-colors group"
                 >
-                  <div className="w-12 h-12 bg-primary/5 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
+                  <div className="w-12 h-12 bg-primary/5 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
                     <span className="text-xl">@</span>
                   </div>
                   <div>
@@ -62,14 +86,14 @@ export function Contact() {
                     <p className="font-medium">{siteConfig.contact.email}</p>
                   </div>
                 </a>
-                
-                <a 
+
+                <a
                   href={siteConfig.contact.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-4 p-4 border border-border hover:border-primary transition-colors group"
                 >
-                  <div className="w-12 h-12 bg-primary/5 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
+                  <div className="w-12 h-12 bg-primary/5 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
                     <span className="text-xl">W</span>
                   </div>
                   <div>
@@ -82,7 +106,16 @@ export function Contact() {
           </Reveal>
 
           <Reveal delay={0.3}>
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" noValidate>
+              <input
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                className="hidden"
+                {...register("website")}
+              />
+
               <div className="space-y-2">
                 <label htmlFor="name" className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
                   Nombre
@@ -90,13 +123,20 @@ export function Contact() {
                 <input
                   type="text"
                   id="name"
-                  name="name"
-                  required
-                  className="w-full bg-background border border-border p-4 focus:outline-none focus:border-primary transition-colors"
                   placeholder="Tu nombre completo"
+                  aria-invalid={errors.name ? "true" : undefined}
+                  className={`w-full bg-background border p-4 focus:outline-none focus:border-primary transition-colors ${
+                    errors.name ? "border-red-400" : "border-border"
+                  }`}
+                  {...register("name")}
                 />
+                {errors.name && (
+                  <p className="text-sm text-red-600" role="alert">
+                    {errors.name.message}
+                  </p>
+                )}
               </div>
-              
+
               <div className="space-y-2">
                 <label htmlFor="email" className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
                   Email
@@ -104,35 +144,55 @@ export function Contact() {
                 <input
                   type="email"
                   id="email"
-                  name="email"
-                  required
-                  className="w-full bg-background border border-border p-4 focus:outline-none focus:border-primary transition-colors"
                   placeholder="tu@email.com"
+                  aria-invalid={errors.email ? "true" : undefined}
+                  className={`w-full bg-background border p-4 focus:outline-none focus:border-primary transition-colors ${
+                    errors.email ? "border-red-400" : "border-border"
+                  }`}
+                  {...register("email")}
                 />
+                {errors.email && (
+                  <p className="text-sm text-red-600" role="alert">
+                    {errors.email.message}
+                  </p>
+                )}
               </div>
-              
+
               <div className="space-y-2">
                 <label htmlFor="message" className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
                   Mensaje
                 </label>
                 <textarea
                   id="message"
-                  name="message"
-                  required
                   rows={5}
-                  className="w-full bg-background border border-border p-4 focus:outline-none focus:border-primary transition-colors resize-none"
                   placeholder="Cuéntame sobre tu proyecto..."
+                  aria-invalid={errors.message ? "true" : undefined}
+                  className={`w-full bg-background border p-4 focus:outline-none focus:border-primary transition-colors resize-none ${
+                    errors.message ? "border-red-400" : "border-border"
+                  }`}
+                  {...register("message")}
                 />
+                {errors.message && (
+                  <p className="text-sm text-red-600" role="alert">
+                    {errors.message.message}
+                  </p>
+                )}
               </div>
 
               {status === "success" && (
-                <div className="p-4 bg-green-50 text-green-800 border border-green-200">
+                <div
+                  className="p-4 bg-green-50 text-green-800 border border-green-200"
+                  role="status"
+                >
                   ¡Mensaje enviado con éxito! Me pondré en contacto contigo pronto.
                 </div>
               )}
 
               {status === "error" && (
-                <div className="p-4 bg-red-50 text-red-800 border border-red-200">
+                <div
+                  className="p-4 bg-red-50 text-red-800 border border-red-200"
+                  role="alert"
+                >
                   Hubo un error al enviar el mensaje. Por favor intenta de nuevo o usa mis redes.
                 </div>
               )}
@@ -140,7 +200,7 @@ export function Contact() {
               <button
                 type="submit"
                 disabled={status === "submitting"}
-                className="w-full inline-flex justify-center items-center gap-2 px-8 py-4 bg-primary text-white hover:bg-accent transition-all duration-300 font-medium uppercase tracking-wider text-sm disabled:opacity-70 disabled:cursor-not-allowed"
+                className="w-full inline-flex justify-center items-center gap-2 px-8 py-4 bg-primary text-primary-foreground hover:bg-accent hover:text-accent-foreground transition-all duration-300 font-medium uppercase tracking-wider text-sm disabled:opacity-70 disabled:cursor-not-allowed"
               >
                 {status === "submitting" ? (
                   <>

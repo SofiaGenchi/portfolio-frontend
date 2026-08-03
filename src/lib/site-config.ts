@@ -48,10 +48,10 @@ export const siteConfig = {
 
   /** SEO */
   seo: {
-    domain: "https://sofiagenchi.com", // Placeholder
-    ogImage: "/og-image.jpg",
+    domain: "https://sofiailengenchi.netlify.app",
+    ogImage: "/opengraph-image.png",
     locale: "es_AR",
-    twitterHandle: "@sofiagenchi", // Placeholder
+    twitterHandle: "",
     keywords: [
       "Desarrolladora Web",
       "Frontend Developer",
